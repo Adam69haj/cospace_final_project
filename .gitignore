@@ -1,0 +1,35 @@
+# =============================================
+# .gitignore — CoSpace
+# =============================================
+
+# --- Fichiers uploadés (données utilisateurs) ---
+public/uploads/**
+!public/uploads/.gitkeep
+
+# --- Fichiers de configuration sensibles ---
+connexion/database.php
+
+# --- Environnement & logs ---
+.env
+*.log
+*.error
+
+# --- Cache & temporaires ---
+.cache/
+tmp/
+temp/
+*.tmp
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Dependencies ---
+vendor/
+node_modules/
+
+# --- Backup ---
+*.bak
+*.swp
