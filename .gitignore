@@ -33,3 +33,10 @@ node_modules/
 # --- Backup ---
 *.bak
 *.swp
+
+# --- Secrets / tokens (NEVER commit) ---
+key*.txt
+*key*.txt
+*token*.txt
+*.pem
+*.key
