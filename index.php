@@ -7,7 +7,7 @@ session_start();
 
 require_once 'connexion/database.php';
 
-
+require_once 'connexion/mailer.php';
 
 function getDB() {
     $dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=".DB_CHARSET;
@@ -127,6 +127,8 @@ require_once 'controllers/MemberController.php';
 require_once 'controllers/ProfileController.php';
 
 require_once 'controllers/CalendarController.php';
+
+require_once 'controllers/AssistantController.php';
 // ============================================
 // 9. ROUTEUR
 // Lit ?page= dans l'URL
@@ -182,8 +184,9 @@ switch ($page) {
 
     case 'calendar': showCalendar(); break;
 
-    
+    case 'assistant-chat': assistantChat(); break;
 
+    case 'assistant-cancel': assistantCancel(); break;
 
     // Page inconnue → login
     default:

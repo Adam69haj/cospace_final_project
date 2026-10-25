@@ -125,6 +125,15 @@ function doRegister() {
     // Tout est bon → crée le compte
     UserModel::creerMembre($nom, $email, $password);
 
+    // Notification email de bienvenue
+    sendCoSpaceEmail(
+        $email,
+        "Bienvenue sur CoSpace !",
+        "<p>Bonjour <strong>" . htmlspecialchars($nom) . "</strong>,</p>
+        <p>Votre compte membre CoSpace a été créé avec succès.</p>
+        <p>Vous pouvez dès maintenant vous connecter et réserver vos salles de coworking.</p>"
+    );
+
     // Message succès + redirection
     setMessage("Compte créé avec succès ! Connectez-vous.");
     redirect('index.php?page=login');

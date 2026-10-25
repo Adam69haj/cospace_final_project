@@ -116,6 +116,22 @@ function reservationStore() {
         return;
     }
 
+    // Notification email de confirmation de réservation
+    $userObj = UserModel::findById(getUserId());
+    $salle   = RoomModel::findById($salle_id);
+    if ($userObj && $salle) {
+        sendCoSpaceEmail(
+            $userObj->getEmail(),
+            "Confirmation de réservation — CoSpace",
+            "<p>Bonjour <strong>" . htmlspecialchars($userObj->getNom()) . "</strong>,</p>
+             <p>Votre réservation a bien été enregistrée :</p>
+             <ul>
+                 <li><strong>Salle :</strong> " . htmlspecialchars($salle['nom']) . "</li>
+                 <li><strong>Date :</strong> " . htmlspecialchars($date) . "</li>
+             </ul>"
+        );
+    }
+
     // Succès
     setMessage("Réservation créée avec succès !");
     redirect('index.php?page=my-reservations');
@@ -162,8 +178,18 @@ function reservationCancel() {
         return;
     }
 
+      $userObj = UserModel::findById(getUserId());
+    if ($userObj) {
+        sendCoSpaceEmail(
+            $userObj->getEmail(),
+            "Annulation de réservation — CoSpace",
+            "<p>Bonjour <strong>" . htmlspecialchars($userObj->getNom()) . "</strong>,</p>
+             <p>Votre réservation du <strong>" . htmlspecialchars($resa['date_reservation']) . "</strong> a bien été annulée.</p>"
+        );
+    }
+    
     // Calcule les secondes restantes avant le début réel du créneau
-    $dateResa   = new DateTime($resa['date_reservation'] . ' 00:00:00');
+    $dateResa   = new DateTime($resa['date_reservation'] . ' ' . $resa['heure_debut']);
     $maintenant = new DateTime();
     $diffHeures = ($dateResa->getTimestamp() - $maintenant->getTimestamp()) / 3600;
 

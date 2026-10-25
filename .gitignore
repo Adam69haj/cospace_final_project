@@ -40,3 +40,10 @@ key*.txt
 *token*.txt
 *.pem
 *.key
+
+# --- AI Service (Python / FastAPI) ---
+ai_service/.env
+ai_service/.venv/
+ai_service/__pycache__/
+bd_cospace.sql
+
